@@ -88,17 +88,25 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   };
 
+
+  // Условный (тернарный) оператор  принимающий три операнда:
+  // условие, ?,  выражение выполняется, если истинно :, выражение которое выполняется, если ложно.
+
   const mouseDownHandler = function (e) {
-      let target = (e.target.tagName === 'SPAN' ? e.target.parentNode : e.target);
-      draggingColumnIndex = [].slice.call(table.querySelectorAll('th')).indexOf(target);
+      if (e.target.tagName === 'SPAN' || e.target.tagName === 'TH') {
 
-      // Определите положение мыши
-      x = e.clientX - target.offsetLeft;
-      y = e.clientY - target.offsetTop;
+          let target = (e.target.tagName === 'SPAN' ? e.target.parentNode : e.target);
 
-      // Прикрепить слушателей к `document`.
-      document.addEventListener('mousemove', mouseMoveHandler);
-      document.addEventListener('mouseup', mouseUpHandler);
+          draggingColumnIndex = [].slice.call(table.querySelectorAll('th')).indexOf(target);
+
+          // Определите положение мыши
+          x = e.clientX - target.offsetLeft;
+          y = e.clientY - target.offsetTop;
+
+          // Прикрепить слушателей к `document`.
+          document.addEventListener('mousemove', mouseMoveHandler);
+          document.addEventListener('mouseup', mouseUpHandler);
+      }
   };
 
   const mouseMoveHandler = function (e) {
