@@ -730,6 +730,7 @@
 
   <title>КЛЮЧАВТО Full stock</title>
   <script src="./index_files/dsp" type="text/javascript" defer="" async=""></script>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
@@ -762,13 +763,13 @@
       <!--<h1 class="main__title title">Автомобили в лизинг</h1>-->
 
       <div class="main__table">
-        <table>
+        <table id="table">
           <tbody>
             <tr>
-              <th><span>Автомобиль</span></th>
+              <th class="draggable"><span>Автомобиль</span></th>
               <!-- -->
-              <th><span>Загрузка фото</span></th>
-              <th class="table-head">
+              <th class="draggable"><span>Загрузка фото</span></th>
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Комплектация</span>
                   <div class="sort-list">
@@ -786,8 +787,8 @@
                 </div>
               </th>
               <!-- -->
-              <th><span>VIN</span></th>
-              <th class="table-head">
+              <th class="draggable"><span>VIN</span></th>
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Двигатель</span>
                   <div class="sort-list">
@@ -804,7 +805,7 @@
                   </div>
                 </div>
               </th>
-              <th class="table-head">
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Коробка</span>
                   <div class="sort-list">
@@ -822,7 +823,7 @@
                 </div>
 
               </th>
-              <th class="table-head">
+              <th class="draggable table-head">
                 <div class="table-head__wrap"><span>Кузов</span>
                   <div class="sort-list">
                     <a class="sort-list__item  icon-up" title="от А до Я"
@@ -838,7 +839,7 @@
                   </div>
                 </div>
               </th>
-              <th class="table-head">
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Год,<br>выпуска</span>
                   <div class="sort-list">
@@ -855,9 +856,7 @@
                   </div>
                 </div>
               </th>
-
-
-              <th class="table-head">
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Цвет</span>
                   <div class="sort-list">
@@ -874,8 +873,7 @@
                   </div>
                 </div>
               </th>
-
-              <th class="table-head">
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Плановый УД КМ</span>
                   <div class="sort-list">
@@ -892,8 +890,7 @@
                   </div>
                 </div>
               </th>
-
-              <th class="table-head">
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Город</span>
                   <div class="sort-list">
@@ -912,8 +909,8 @@
               </th>
 
               <!--<th><span>Салон</span></th>-->
-              <th><span>Доп.<br>оборудование</span></th>
-              <th class="table-head">
+              <th class="draggable"><span>Доп.<br>оборудование</span></th>
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Цена продажи</span>
                   <div class="sort-list">
@@ -931,7 +928,7 @@
                 </div>
               </th>
 
-              <th class="table-head">
+              <th class="draggable table-head">
                 <div class="table-head__wrap">
                   <span>Себестоимость</span>
                   <div class="sort-list">
@@ -949,7 +946,7 @@
                 </div>
               </th>
 
-              <th></th>
+              <th class="draggable"></th>
             </tr>
 
             <tr class="table-shows-element " id="bx_3218110189_21850">
@@ -4905,86 +4902,7 @@
   <!-- <script src="/local/templates/keyauto-leasing/assets/libs/fslightbox.js"></script> -->
   <script src="./index_files/fancybox.umd.js.download"></script>
 
-
-
-
-  <div class="adm-informer" id="admin-informer" style="display: none; top: 48px; left: 316px; z-index: 1000 !important;"
-    onclick="return BX.adminInformer.OnInnerClick(event);">
-    <div class="adm-informer-header">Новые уведомления</div>
-    <div class="adm-informer-item adm-informer-item-red" style="display:block">
-      <div class="adm-informer-item-title">
-        Автокомпозитный сайт
-      </div>
-      <div class="adm-informer-item-body">
-        <div class="adm-informer-item-html" id="adm-informer-item-html-0">
-          Уникальная технология позволит ускорить скорость загрузки страниц вашего сайта.
-          <span class="adm-informer-icon"></span>
-        </div>
-        <div class="adm-informer-item-footer" id="adm-informer-item-footer-0">
-          <a href="https://keyauto-fs.ru/bitrix/admin/composite.php?lang=ru">Включить АвтоКомпозит</a>
-        </div>
-      </div>
-    </div>
-    <div class="adm-informer-item adm-informer-item-blue" style="display:block">
-      <div class="adm-informer-item-title">
-        Сканер безопасности
-      </div>
-      <div class="adm-informer-item-body">
-        <div class="adm-informer-item-html" id="adm-informer-item-html-1">
-
-          <div class="adm-informer-item-section">
-            <span class="adm-informer-item-l">
-              <span>Сканирование выполнялось очень давно либо не выполнялось вовсе</span>
-            </span>
-          </div>
-
-          <span class="adm-informer-icon"></span>
-        </div>
-        <div class="adm-informer-item-footer" id="adm-informer-item-footer-1">
-          <a href="https://keyauto-fs.ru/bitrix/admin/security_scanner.php?lang=ru">Перейти к сканированию</a>
-        </div>
-      </div>
-    </div>
-    <div class="adm-informer-item adm-informer-item-gray" style="display:block">
-      <div class="adm-informer-item-title">
-        Обновления
-      </div>
-      <div class="adm-informer-item-body">
-        <div class="adm-informer-item-html" id="adm-informer-item-html-2">
-          <span class="adm-informer-strong-text">Версия системы 21.900.0</span><br>Последнее обновление<br>27.06.2022
-          11:09:28
-          <span class="adm-informer-icon"></span>
-        </div>
-        <div class="adm-informer-item-footer" id="adm-informer-item-footer-2">
-          <a href="https://keyauto-fs.ru/bitrix/admin/update_system.php?refresh=Y&amp;lang=ru">Проверить обновления</a>
-        </div>
-      </div>
-    </div>
-    <div class="adm-informer-item adm-informer-item-blue" style="display:none">
-      <div class="adm-informer-item-title">
-        Проактивная защита
-      </div>
-      <div class="adm-informer-item-body">
-        <div class="adm-informer-item-html" id="adm-informer-item-html-3">
-
-          <div class="adm-informer-item-section">
-            <span class="adm-informer-item-l">
-              <span class="adm-informer-strong-text">Защита включена.<br></span>
-              <span>Попыток вторжения не обнаружено</span>
-            </span>
-          </div>
-
-          <span class="adm-informer-icon"></span>
-        </div>
-        <div class="adm-informer-item-footer" id="adm-informer-item-footer-3">
-          <a href="https://keyauto-fs.ru/bitrix/admin/security_filter.php?lang=ru">Настроить защиту</a>
-        </div>
-      </div>
-    </div>
-    <a href="javascript:void(0);" class="adm-informer-footer adm-informer-footer-collapsed" hidefocus="true"
-      id="adm-informer-footer" onclick="return BX.adminInformer.ToggleExtra();">Показать все (4) </a>
-    <span class="adm-informer-arrow"></span>
-  </div>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

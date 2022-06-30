@@ -1,0 +1,319 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>HTML DOM - Drag and drop table column</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .table {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      border: 1px solid #ccc;
+    }
+
+    .table th,
+    .table td {
+      padding: 0.5rem;
+    }
+
+    .draggable {
+      cursor: move;
+      user-select: none;
+      background-color: tomato;
+    }
+
+    .placeholder {
+      background-color: #edf2f7;
+      border: 2px dashed #cbd5e0;
+    }
+
+    .clone-list {
+      border-left: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      display: flex;
+    }
+
+    .clone-table {
+      border-collapse: collapse;
+      border: none;
+    }
+
+    .clone-table th,
+    .clone-table td {
+      border: 1px solid #ccc;
+      border-left: none;
+      border-top: none;
+      padding: 0.5rem;
+    }
+
+    .dragging {
+      background: #fff;
+      border-left: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      z-index: 999;
+      background-color: rgb(238, 17, 72);
+    }
+
+  </style>
+</head>
+
+<body>
+  <table id="table" class="table">
+    <thead>
+      <tr>
+        <th class="draggable"><span>Автомобиль</span></th>
+        <th class="draggable"><span>Загрузка фото</span></th>
+        <th class="draggable"><span>Комплектация</span></th>
+        <th class="draggable"><span>VIN</span></th>
+        <th class="draggable"><span>Двигатель</span></th>
+        <th class="draggable"><span>Коробка</span></th>
+        <th class="draggable"><span>Кузов</span></th>
+        <th class="draggable"><span>Год,<br>выпуска</span></th>
+        <th class="draggable"><span>Цвет</span> </th>
+        <th class="draggable"><span>Плановый УД КМ</span></th>
+        <th class="draggable"><span>Город</span></th>
+        <th class="draggable"><span>Доп.<br>оборудование</span></th>
+        <th class="draggable"><span>Цена продажи</span></th>
+        <th class="draggable"><span>Себестоимость</span></th>
+        <th class="draggable"><span>Себестоимость</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-shows-element ">
+        <td class="custom-table__first">
+          <button type="button" class="add-favorite add-this-favorite-21850" onclick="addToFavoriteThisProduct(this);"
+            data-id="21850">
+            <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_60_62)">
+                <path
+                  d="M8.5 0H1.5C0.673333 0 0 0.760842 0 1.69547V12.4348C0 12.6511 0.109333 12.8474 0.28 12.9425C0.363358 12.9889 0.458579 13.0078 0.552778 12.9968C0.646976 12.9858 0.735603 12.9454 0.806667 12.8809L5 9.19442L9.19333 12.8809C9.2644 12.9454 9.35302 12.9858 9.44722 12.9968C9.54142 13.0078 9.63664 12.9889 9.72 12.9425C9.80671 12.8914 9.87845 12.8173 9.92771 12.728C9.97696 12.6387 10.0019 12.5375 10 12.4348V1.69547C10 0.760842 9.32667 0 8.5 0ZM9 11.2792L5.30667 8.03263C5.22187 7.95605 5.11295 7.91352 5 7.91289C4.88718 7.91357 4.77835 7.95582 4.69333 8.03195L1 11.2792V1.69547C1 1.38416 1.22467 1.13032 1.5 1.13032H8.5C8.77533 1.13032 9 1.38416 9 1.69547V11.2792Z"
+                  fill="white"></path>
+              </g>
+              <defs>
+                <clippath id="clip0_60_62">
+                  <rect width="10" height="13" fill="white"></rect>
+                </clippath>
+              </defs>
+            </svg>
+
+          </button>
+
+          <div class="custom-table__wrapper">
+            <a data-fancybox="gallery_21850"
+              href="https://keyauto-fs.ru/upload/iblock/578/kkuq1z5g36btibgrelh6wymxi34hpry9/e6b31cfb75ae35cd51220335d7311e4e.jpg">
+              <img src="./index_files/e6b31cfb75ae35cd51220335d7311e4e.jpg" alt="Kia Rio, IV Рестайлинг"
+                title="Kia Rio, IV Рестайлинг">
+            </a>
+
+            <a class="custom-table__link specification_modal_btn" onclick="openSpecification(this);"
+              href="javascript:void(0)" data-id="21850" data-custom-open="modal-specification">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="7" width="2" height="16" fill="#A50034"></rect>
+                <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+              </svg>
+              <span>Kia Rio, IV Рестайлинг</span>
+            </a>
+          </div>
+
+          <!-- <a href="#" class="download-all-photo"><span>Скачать</span></a> -->
+        </td>
+        <!-- новая колонка - скачать все фото  -->
+        <td><a class="custom-table__link equimpent_modal_btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" width="2" height="16" fill="#A50034"></rect>
+              <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+            </svg>
+            <span>Скачать все фото</span>
+          </a>
+        </td>
+
+        <td class="custom-td">Prestige</td>
+        <td>Z94C341BBNR255962</td>
+        <td>Бензин</td>
+        <td>Автоматическая</td>
+        <td>Седан 4 дв.</td>
+        <td>2022</td>
+        <td>Белый</td>
+        <td>230590</td>
+        <td>Хендэ Киа Сочи</td>
+        <!--<td></td>-->
+        <td><a class="custom-table__link equimpent_modal_btn" href="javascript:void(0)" onclick="openEquipment(this);"
+            data-id="21850" data-custom-open="modal-add-equipment">
+            <!--data-custom-open="modal-add-equipment"-->
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" width="2" height="16" fill="#A50034"></rect>
+              <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+            </svg>
+            <span>Смотреть</span>
+          </a></td>
+        <td class="custom-table__price">
+          1 768 070 ₽
+        </td>
+        <td class="custom-table__price">
+          1 470 000 ₽
+        </td>
+        <td class="custom-table__button"><a class="button" target="_blank" href="https://keyauto-fs.ru/"
+            download="">Получить КП</a></td>
+      </tr>
+      <tr class="table-shows-element " id="bx_3218110189_21849">
+        <td class="custom-table__first">
+          <button type="button" class="add-favorite add-this-favorite-21849" onclick="addToFavoriteThisProduct(this);"
+            data-id="21849">
+            <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_60_62)">
+                <path
+                  d="M8.5 0H1.5C0.673333 0 0 0.760842 0 1.69547V12.4348C0 12.6511 0.109333 12.8474 0.28 12.9425C0.363358 12.9889 0.458579 13.0078 0.552778 12.9968C0.646976 12.9858 0.735603 12.9454 0.806667 12.8809L5 9.19442L9.19333 12.8809C9.2644 12.9454 9.35302 12.9858 9.44722 12.9968C9.54142 13.0078 9.63664 12.9889 9.72 12.9425C9.80671 12.8914 9.87845 12.8173 9.92771 12.728C9.97696 12.6387 10.0019 12.5375 10 12.4348V1.69547C10 0.760842 9.32667 0 8.5 0ZM9 11.2792L5.30667 8.03263C5.22187 7.95605 5.11295 7.91352 5 7.91289C4.88718 7.91357 4.77835 7.95582 4.69333 8.03195L1 11.2792V1.69547C1 1.38416 1.22467 1.13032 1.5 1.13032H8.5C8.77533 1.13032 9 1.38416 9 1.69547V11.2792Z"
+                  fill="white"></path>
+              </g>
+              <defs>
+                <clippath id="clip0_60_62">
+                  <rect width="10" height="13" fill="white"></rect>
+                </clippath>
+              </defs>
+            </svg>
+
+          </button>
+
+          <div class="custom-table__wrapper">
+            <a data-fancybox="gallery_21849"
+              href="https://keyauto-fs.ru/upload/iblock/d60/jk8tgh32mktib6ybdlggv9v7k6s3st64/c755f9fb3ccab46f6d171664c5694497.jpg">
+              <img src="./index_files/c755f9fb3ccab46f6d171664c5694497.jpg" alt="Hyundai Creta, II"
+                title="Hyundai Creta, II">
+            </a>
+
+            <a class="custom-table__link specification_modal_btn" onclick="openSpecification(this);"
+              href="javascript:void(0)" data-id="21849" data-custom-open="modal-specification">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="7" width="2" height="16" fill="#A50034"></rect>
+                <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+              </svg>
+              <span>Hyundai Creta, II</span>
+            </a>
+          </div>
+
+          <!-- <a href="#" class="download-all-photo"><span>Скачать</span></a> -->
+        </td>
+        <!-- новая колонка - скачать все фото  -->
+        <td><a class="custom-table__link equimpent_modal_btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" width="2" height="16" fill="#A50034"></rect>
+              <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+            </svg>
+            <span>Скачать все фото</span>
+          </a>
+        </td>
+
+        <td class="custom-td">Family</td>
+        <td>Z94PF815BNR041367</td>
+        <td>Бензин</td>
+        <td>Автоматическая</td>
+        <td>Внедорожник 5 дв.</td>
+        <td>2022</td>
+        <td>Серый</td>
+        <td>300000</td>
+        <td>Хендэ Ростов</td>
+        <!--<td></td>-->
+        <td><a class="custom-table__link equimpent_modal_btn" href="javascript:void(0)" onclick="openEquipment(this);"
+            data-id="21849" data-custom-open="modal-add-equipment">
+            <!--data-custom-open="modal-add-equipment"-->
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" width="2" height="16" fill="#A50034"></rect>
+              <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+            </svg>
+            <span>Смотреть</span>
+          </a></td>
+        <td class="custom-table__price">
+          2 459 080 ₽
+        </td>
+        <td class="custom-table__price">
+          2 054 400 ₽
+        </td>
+        <td class="custom-table__button"><a class="button" target="_blank" href="https://keyauto-fs.ru/"
+            download="">Получить КП</a></td>
+      </tr>
+      <tr class="table-shows-element " id="bx_3218110189_21846">
+        <td class="custom-table__first">
+          <button type="button" class="add-favorite add-this-favorite-21846" onclick="addToFavoriteThisProduct(this);"
+            data-id="21846">
+            <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_60_62)">
+                <path
+                  d="M8.5 0H1.5C0.673333 0 0 0.760842 0 1.69547V12.4348C0 12.6511 0.109333 12.8474 0.28 12.9425C0.363358 12.9889 0.458579 13.0078 0.552778 12.9968C0.646976 12.9858 0.735603 12.9454 0.806667 12.8809L5 9.19442L9.19333 12.8809C9.2644 12.9454 9.35302 12.9858 9.44722 12.9968C9.54142 13.0078 9.63664 12.9889 9.72 12.9425C9.80671 12.8914 9.87845 12.8173 9.92771 12.728C9.97696 12.6387 10.0019 12.5375 10 12.4348V1.69547C10 0.760842 9.32667 0 8.5 0ZM9 11.2792L5.30667 8.03263C5.22187 7.95605 5.11295 7.91352 5 7.91289C4.88718 7.91357 4.77835 7.95582 4.69333 8.03195L1 11.2792V1.69547C1 1.38416 1.22467 1.13032 1.5 1.13032H8.5C8.77533 1.13032 9 1.38416 9 1.69547V11.2792Z"
+                  fill="white"></path>
+              </g>
+              <defs>
+                <clippath id="clip0_60_62">
+                  <rect width="10" height="13" fill="white"></rect>
+                </clippath>
+              </defs>
+            </svg>
+
+          </button>
+
+          <div class="custom-table__wrapper">
+            <a data-fancybox="gallery_21846"
+              href="https://keyauto-fs.ru/upload/iblock/489/qve40wslruccxv26b6d45m9nzt0qo8aa/3752ffda96ad5dec49999598aff6a335.jpg">
+              <img src="./index_files/3752ffda96ad5dec49999598aff6a335.jpg" alt="BMW X5, IV (G05)"
+                title="BMW X5, IV (G05)">
+            </a>
+
+            <a class="custom-table__link specification_modal_btn" onclick="openSpecification(this);"
+              href="javascript:void(0)" data-id="21846" data-custom-open="modal-specification">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="7" width="2" height="16" fill="#A50034"></rect>
+                <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+              </svg>
+              <span>BMW X5, IV (G05)</span>
+            </a>
+          </div>
+
+          <!-- <a href="#" class="download-all-photo"><span>Скачать</span></a> -->
+        </td>
+        <!-- новая колонка - скачать все фото  -->
+        <td><a class="custom-table__link equimpent_modal_btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" width="2" height="16" fill="#A50034"></rect>
+              <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+            </svg>
+            <span>Скачать все фото</span>
+          </a>
+        </td>
+
+        <td class="custom-td">M50d</td>
+        <td>WBACV010809K99131</td>
+        <td>Дизель</td>
+        <td>Автоматическая</td>
+        <td>Внедорожник 5 дв.</td>
+        <td>2022</td>
+        <td>Черный</td>
+        <td>7395661</td>
+        <td>БМВ КМВ</td>
+        <!--<td></td>-->
+        <td><a class="custom-table__link equimpent_modal_btn" href="javascript:void(0)" onclick="openEquipment(this);"
+            data-id="21846" data-custom-open="modal-add-equipment">
+            <!--data-custom-open="modal-add-equipment"-->
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" width="2" height="16" fill="#A50034"></rect>
+              <rect x="16" y="7" width="2" height="16" transform="rotate(90 16 7)" fill="#A50034"></rect>
+            </svg>
+            <span>Смотреть</span>
+          </a></td>
+        <td class="custom-table__price">
+          21 574 559 ₽
+        </td>
+        <td class="custom-table__price">
+          11 243 909 ₽
+        </td>
+        <td class="custom-table__button"><a class="button" target="_blank" href="https://keyauto-fs.ru/"
+            download="">Получить КП</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script src="js/main-copy.js"></script>
+</body>
+</html>
