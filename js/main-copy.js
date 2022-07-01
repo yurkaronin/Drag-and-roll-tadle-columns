@@ -88,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   };
 
+  let currentTableHeight = 0;
+  let currentCellWith = 0;
 
   // Условный (тернарный) оператор  принимающий три операнда:
   // условие, ?,  выражение выполняется, если истинно :, выражение которое выполняется, если ложно.
@@ -95,7 +97,25 @@ document.addEventListener('DOMContentLoaded', function () {
   const mouseDownHandler = function (e) {
       if (e.target.tagName === 'SPAN' || e.target.tagName === 'TH') {
 
-          let target = (e.target.tagName === 'SPAN' ? e.target.parentNode : e.target);
+          let target = (e.target.tagName === 'SPAN' ? e.target.closest('th') : e.target);
+
+          currentTableHeight = table.offsetHeight;
+          currentCellWith = target.offsetWidth;
+
+          let css = '';
+          let rows = table.querySelectorAll('tr');
+          let style = table.parentNode.querySelector('style');
+
+          if (!style) {
+            table.parentNode.appendChild(document.createElement('style'));
+            style = table.parentNode.querySelector('style');
+          }
+
+          for (var i = 0; i < rows.length; i++) {
+            css += '.clone-list > div tr:nth-child(' + (i + 1) +') > * {height: ' + rows[i].offsetHeight + 'px} ';
+
+          }
+          style.innerHTML = css;
 
           draggingColumnIndex = [].slice.call(table.querySelectorAll('th')).indexOf(target);
 
@@ -113,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!isDraggingStarted) {
           isDraggingStarted = true;
 
+          console.log(currentCellWith, currentTableHeight);
           cloneTable();
 
           draggingEle = [].slice.call(list.children)[draggingColumnIndex];
@@ -124,7 +145,13 @@ document.addEventListener('DOMContentLoaded', function () {
           placeholder = document.createElement('div');
           placeholder.classList.add('placeholder');
           draggingEle.parentNode.insertBefore(placeholder, draggingEle.nextSibling);
-          placeholder.style.width = `${draggingEle.offsetWidth}px`;
+          // placeholder.style.width = `${draggingEle.offsetWidth}px`;
+
+          draggingEle.style.height = `${currentTableHeight}px`;
+          draggingEle.style.width = `${currentCellWith}px`;
+          placeholder.style.height = `${currentTableHeight}px`;
+          placeholder.style.width = `${currentCellWith}px`;
+
       }
 
       // Установите позицию для перетаскивания элемента
